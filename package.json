@@ -1,0 +1,174 @@
+{
+  "name": "ai-unlimited-chat",
+  "displayName": "AI Unlimited Chat",
+  "description": "Unlimited AI chat for VS Code - like Cursor but free",
+  "version": "1.0.0",
+  "publisher": "your-publisher",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning",
+    "Education"
+  ],
+  "keywords": [
+    "ai",
+    "chat",
+    "cursor",
+    "unlimited",
+    "free",
+    "assistant"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ai-chat.open",
+        "title": "Open AI Chat",
+        "category": "AI Chat"
+      },
+      {
+        "command": "ai-chat.analyze",
+        "title": "Analyze Code",
+        "category": "AI Chat"
+      },
+      {
+        "command": "ai-chat.explain",
+        "title": "Explain Code",
+        "category": "AI Chat"
+      },
+      {
+        "command": "ai-chat.fix",
+        "title": "Fix Code Issues",
+        "category": "AI Chat"
+      },
+      {
+        "command": "ai-chat.generate",
+        "title": "Generate Code",
+        "category": "AI Chat"
+      },
+      {
+        "command": "ai-chat.switchProvider",
+        "title": "Switch AI Provider",
+        "category": "AI Chat"
+      },
+      {
+        "command": "ai-chat.clearHistory",
+        "title": "Clear Chat History",
+        "category": "AI Chat"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "ai-chat.open",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a"
+      },
+      {
+        "command": "ai-chat.explain",
+        "key": "ctrl+shift+e",
+        "mac": "cmd+shift+e"
+      },
+      {
+        "command": "ai-chat.analyze",
+        "key": "ctrl+shift+r",
+        "mac": "cmd+shift+r"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "ai-chat.explain",
+          "group": "ai-chat@1",
+          "when": "editorTextFocus"
+        },
+        {
+          "command": "ai-chat.analyze",
+          "group": "ai-chat@2",
+          "when": "editorTextFocus"
+        },
+        {
+          "command": "ai-chat.fix",
+          "group": "ai-chat@3",
+          "when": "editorTextFocus"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "ai-chat.open"
+        },
+        {
+          "command": "ai-chat.analyze"
+        },
+        {
+          "command": "ai-chat.explain"
+        },
+        {
+          "command": "ai-chat.fix"
+        },
+        {
+          "command": "ai-chat.generate"
+        },
+        {
+          "command": "ai-chat.switchProvider"
+        },
+        {
+          "command": "ai-chat.clearHistory"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AI Chat Configuration",
+      "properties": {
+        "aiChat.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API Key"
+        },
+        "aiChat.anthropicApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Anthropic (Claude) API Key"
+        },
+        "aiChat.huggingfaceApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "HuggingFace API Key"
+        },
+        "aiChat.defaultProvider": {
+          "type": "string",
+          "enum": ["OpenAI", "Claude", "HuggingFace", "Local LLM"],
+          "default": "Local LLM",
+          "description": "Default AI provider"
+        },
+        "aiChat.maxContextLength": {
+          "type": "number",
+          "default": 20,
+          "description": "Maximum number of messages to keep in context"
+        },
+        "aiChat.enableCodeContext": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically include code context in chat"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.0"
+  }
+}
